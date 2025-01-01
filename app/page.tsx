@@ -1,5 +1,13 @@
+'use client';
 import Link from "next/link";
-import features from "../constants/index";
+import dynamic from "next/dynamic";
+
+const AnimatedNumbers = dynamic(
+  () => {
+    return import("react-animated-numbers");
+  },
+  {ssr: false}
+);
 
 export default function Home() {
   return (
@@ -21,7 +29,7 @@ export default function Home() {
                 d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
               />
             </svg>
-            <p>Secure & Anonymous Reporing</p>
+            <p>Secure & Anonymous Reporting</p>
           </div>
 
           <h1 className="mt-8 bg-gradient-to-b from-white to-white/80 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-6xl">
@@ -152,14 +160,15 @@ export default function Home() {
         <div className="mt-40 rounded-2xl bg-zinc-900 p-8">
           <div className="grid gap-y-8 sm:grid-cols-3">
             {[
-              { value: "100K+", label: "Reports Filed" },
-              { value: "100%", label: "Anonymity Rate" },
+              { value: "100K", label: "Reports Filed", postfix: "+" },
+              { value: "100", label: "Anonymity Rate", postfix: "%" },
               { value: "24/7", label: "Support Available" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
                 <div className="text-3xl font-bold text-white">
                   {stat.value}
                 </div>
+                
                 <div className="mt-1 text-sm text-zinc-400">{stat.label}</div>
               </div>
             ))}

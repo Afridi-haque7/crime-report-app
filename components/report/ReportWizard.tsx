@@ -2,7 +2,7 @@
 
 import {useState} from "react"
 import { ReportForm } from "./ReportForm";
-
+import { ReportSubmitted } from "./ReportFormCompleted";
 
 
 export function ReportWizard() {
@@ -11,20 +11,16 @@ export function ReportWizard() {
 
     const handleStepComplete = async (data: any) => {
         setReportData({...reportData, ...data});
-        if(currentStep === 3){
+        if(currentStep === 4){
             return;
         }
         setCurrentStep((prev) => prev+1);
     };
 
     return (
-        <div className="rounded-2xl bg-zinc-900 p-8">
-            {
-                currentStep === 1 ?
-                <ReportForm onComplete={handleStepComplete}/>
-                :
-                <></>
-            }
-        </div>
-    )
+      <div className="rounded-2xl bg-zinc-900 p-8">
+        {currentStep === 1 && <ReportForm onComplete={handleStepComplete} />}
+        {currentStep === 2 && <ReportSubmitted data={reportData} onComplete={handleStepComplete} />}
+      </div>
+    );
 }
