@@ -45,7 +45,15 @@ export default function SubmitReport() {
 
             <div className="mt-16 bg-zinc-900/50 rounded-2xl border border-white/5 p-6">
               {/* report wizard */}
-              <ReportWizard/>
+              <ReportWizard />
+            </div>
+          </div>
+
+          {/* Trust Badge */}
+          <div className="mt-40 flex justify-center">
+            <div className="inline-flex items-center gap-3 rounded-full bg-zinc-900 px-5 py-2 text-sm text-zinc-400">
+              <span className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
+              Trusted by Law Enforcement Nationwide
             </div>
           </div>
         </main>

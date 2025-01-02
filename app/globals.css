@@ -7,6 +7,9 @@ body {
   background-color: black;
 }
 
+body::-webkit-scrollbar{
+  display: none;
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;

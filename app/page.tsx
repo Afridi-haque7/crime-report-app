@@ -47,7 +47,7 @@ export default function Home() {
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
             <Link href={"/submit-report"}>
-              <button className="group relative flex h-12 items-center justify-center gap-2 rounded-xl bg-sky-500 px-8 text-sm font-medium text-white transition-all hover:bg-sky-400">
+              <button className="group w-[270px] relative flex h-12 items-center justify-center gap-2 rounded-xl bg-sky-500 px-8 text-sm font-medium text-white transition-all hover:bg-sky-400">
                 Make Anonymous Report
                 <svg
                   className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
@@ -65,7 +65,7 @@ export default function Home() {
               </button>
             </Link>
             <Link href={"/how-it-works"}>
-              <button className="group relative flex h-12 items-center justify-center gap-2 rounded-xl bg-white/5 px-8 text-sm font-medium ring-1 ring-inset ring-white/10 text-white transition-all hover:bg-white/10">
+              <button className="group w-[270px] relative flex h-12 items-center justify-center gap-2 rounded-xl bg-white/5 px-8 text-sm font-medium ring-1 ring-inset ring-white/10 text-white transition-all hover:bg-white/10">
                 How It Works
               </button>
             </Link>
@@ -168,7 +168,7 @@ export default function Home() {
                 <div className="text-3xl font-bold text-white">
                   {stat.value}
                 </div>
-                
+
                 <div className="mt-1 text-sm text-zinc-400">{stat.label}</div>
               </div>
             ))}
@@ -178,7 +178,7 @@ export default function Home() {
         {/* Trust Badge */}
         <div className="mt-40 flex justify-center">
           <div className="inline-flex items-center gap-3 rounded-full bg-zinc-900 px-5 py-2 text-sm text-zinc-400">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            <span className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
             Trusted by Law Enforcement Nationwide
           </div>
         </div>

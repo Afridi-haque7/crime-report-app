@@ -165,7 +165,7 @@ export function ReportForm({ onComplete }: ReportFormProps) {
               />
             </svg>
             <span className="font-medium text-red-500">Emergency</span>
-            <span className="text-xs text-zinc-400">
+            <span className="text-xs text-zinc-400 hidden md:block">
               Immediate Response Required
             </span>
           </div>
@@ -199,7 +199,7 @@ export function ReportForm({ onComplete }: ReportFormProps) {
               />
             </svg>
             <span className="font-medium text-orange-500">Non-Emergency</span>
-            <span className="text-xs text-zinc-400">General Report</span>
+            <span className="text-xs text-zinc-400 hidden md:block">General Report</span>
           </div>
         </button>
       </div>
