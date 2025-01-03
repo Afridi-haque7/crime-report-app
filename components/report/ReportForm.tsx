@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect, useId, useCallback } from "react";
-import Image from "next/image";
+import { useState, useId, useCallback } from "react";
 import { LocationInput } from "./LocationInput";
 import crypto from "crypto";
 

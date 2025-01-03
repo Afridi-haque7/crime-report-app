@@ -1,5 +1,7 @@
 "use client";
 
+import ContactForm from "@/components/contact/ContactForm";
+import EmergencyList from "@/components/contact/Emergency";
 import FAQ from "@/components/contact/FAQ";
 
 export default function Resources() {
@@ -11,7 +13,7 @@ export default function Resources() {
         <div className="absolute inset-0 h-full bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.04),transparent_70%)]" />
       </div>
 
-      <main className="relative px-12 pt-20 pb-20">
+      <main className="relative px-4 md:px-12 pt-20 pb-20">
         {/* Header Section */}
         <div className="flex flex-col items-center text-center">
           <div className="inline-flex h-9 items-center gap-2 rounded-full border border-sky-500/20 bg-sky-500/10 px-4 text-sm text-sky-400">
@@ -48,9 +50,9 @@ export default function Resources() {
           </div>
 
           <h1 className="mt-8 bg-gradient-to-b from-white to-white/80 bg-clip-text text-5xl font-bold tracking-tight text-transparent">
-            Have Questions? We're Here to Help
+            Have Questions? We&apos;re Here to Help
             <span className="block text-3xl mt-4 bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent">
-              Let's Resolve Your Queries
+              Let&apos;s Resolve Your Queries
             </span>
           </h1>
 
@@ -60,10 +62,13 @@ export default function Resources() {
           </p>
         </div>
         {/* Emergency dials */}
-
-        {/* FAQs */}
-        <FAQ />
+        <div className="flex flex-col gap-4 lg:flex-row ">
+          <EmergencyList />
+          {/* FAQs */}
+          <FAQ />
+        </div>
         {/* Contact Form */}
+        <ContactForm />
       </main>
     </div>
   );
