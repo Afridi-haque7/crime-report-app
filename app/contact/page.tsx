@@ -1,5 +1,7 @@
 "use client";
 
+import FAQ from "@/components/contact/FAQ";
+
 export default function Resources() {
   return (
     <div className="relative min-h-screen bg-black selection:bg-sky-500/20 overflow-hidden">
@@ -60,7 +62,7 @@ export default function Resources() {
         {/* Emergency dials */}
 
         {/* FAQs */}
-
+        <FAQ />
         {/* Contact Form */}
       </main>
     </div>
