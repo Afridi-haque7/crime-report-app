@@ -55,7 +55,7 @@ export function ReportTracker() {
     return (
       <div
         className={`w-full py-40
-        ${reportDetails ? "pt-[450px]" : "py-40"}
+        ${reportDetails ? "pt-[500px]" : "py-40"}
       `}
       >
         {/* Header Section */}

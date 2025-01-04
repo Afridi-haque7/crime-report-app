@@ -320,7 +320,7 @@ export function ReportForm({ onComplete }: ReportFormProps) {
         onChange={(value) =>
           setFormData((prev) => ({ ...prev, location: value }))
         }
-        onCoordinatesChange={(lat, lng) =>
+        onCoordinateChange={(lat, lng) =>
           setCoordinates({
             latitude: lat,
             longitude: lng,

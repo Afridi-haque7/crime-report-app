@@ -1,9 +1,20 @@
 "use client";
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 export default function ContactForm() {
   return (
     <div className="w-full mx-auto mt-4 px-0 md:px-6 lg:px-24 py-8 ">
-      <main className="relative px-4 md:px-12 pt-4 pb-20">
+      <main className="relative px-0 md:px-12 pt-4 pb-20">
         {/* Header */}
         <div className="flex flex-col items-center text-center">
           <h1 className="mt-8 bg-gradient-to-b from-white to-white/80 bg-clip-text text-5xl font-bold tracking-tight text-transparent">
@@ -64,27 +75,43 @@ export default function ContactForm() {
               required
             />
           </div>
-          <button
-            className="w-full relative flex justify-center gap-2 items-center group overflow-hidden rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 
+
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <button
+                className="w-full relative flex justify-center gap-2 items-center group overflow-hidden rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 
                  px-4 py-3.5 text-sm font-medium text-white shadow-lg
                  transition-all duration-200 hover:from-sky-400 hover:to-blue-500
                  disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <span>Submit</span>
-            <svg
-              className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
-          </button>
+              >
+                <span>Submit</span>
+                <svg
+                  className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
+              </button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Your message sent to SafeReport team</AlertDialogTitle>
+                <AlertDialogDescription>
+                  You will hear from us within 24 hours.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogAction>Continue</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </form>
       </main>
     </div>
