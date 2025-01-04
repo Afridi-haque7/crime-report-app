@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -30,6 +29,10 @@ const handler = NextAuth({
           throw new Error("No user found with this email");
         }
 
+        if(user.role !== 'ADMIN') {
+          throw new Error("No admin found with this email");
+        }
+
         const passwordMatch = await bcrypt.compare(
           credentials.password,
           user.password
@@ -50,7 +53,7 @@ const handler = NextAuth({
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
+      if (user && user.role === 'ADMIN') {
         token.role = user.role;
       }
       return token;

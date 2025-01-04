@@ -7,6 +7,7 @@ export async function PATCH(
   request: Request,
   { params }: { params: { id: string } }
 ) {
+  const id = params.reportId;
   try {
     const session = await getServerSession();
     if (!session) {
@@ -15,12 +16,12 @@ export async function PATCH(
 
     const { status } = await request.json();
     const report = await prisma.report.update({
-      where: { id: params.id },
+      where: { id: id },
       data: { status },
     });
 
     return NextResponse.json(report);
-  } catch (error) {
+  } catch (error) {    
     return NextResponse.json(
       { error: "Error updating report" },
       { status: 500 }

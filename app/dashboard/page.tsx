@@ -47,6 +47,8 @@ export default function Dashboard() {
       }
     } catch (error) {
       console.error("Error updating report:", error);
+      console.log(error);
+      
     }
   };
 
@@ -185,6 +187,8 @@ export default function Dashboard() {
                       src={report.image}
                       alt="Report"
                       className="mt-4 rounded-lg border border-neutral-800"
+                      width={400}
+                      height={400}
                     />
                   )}
                 </div>
