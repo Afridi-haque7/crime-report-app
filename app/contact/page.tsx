@@ -22,17 +22,17 @@ export default function Resources() {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               stroke="#000000"
-              stroke-width="0.00024000000000000003"
+              strokeWidth="0.00024000000000000003"
               transform="rotate(-45)"
               className="w-5 h-5"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 stroke="#CCCCCC"
-                stroke-width="0.048"
+                strokeWidth="0.048"
               ></g>
               <g id="SVGRepo_iconCarrier">
                 {" "}

@@ -22,6 +22,12 @@ export default function Dashboard() {
       const response = await fetch("/api/reports");
       const data = await response.json();
       setReports(data);
+      console.log("API Response:", data); // Debugging
+      if (Array.isArray(data)) {
+        setReports(data);
+      } else {
+        console.error("API did not return an array:", data);
+      }
     } catch (error) {
       console.error("Error fetching reports:", error);
     } finally {
@@ -52,11 +58,11 @@ export default function Dashboard() {
     }
   };
 
-  const filteredReports = reports.filter((report) => {
+  const filteredReports = Array.isArray(reports)? reports.filter((report) => {
     const statusMatch = filter === "ALL" || report.status === filter;
     const typeMatch = typeFilter === "ALL" || report.type === typeFilter;
     return statusMatch && typeMatch;
-  });
+  }) : [];
 
   const getStatusColor = (status: ReportStatus) => {
     const colors = {
@@ -78,20 +84,20 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white flex flex-col justify-center">
       <nav className="border-b border-neutral-800 bg-black/50 backdrop-blur-xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
-              Admin Dashboard
+              <span className="hidden md:block">Admin</span> Dashboard
             </h1>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2 md:gap-6">
               <span className="text-neutral-400">
                 {session?.user?.name || "Admin"}
               </span>
               <button
                 onClick={() => signOut()}
-                className="px-4 py-2 text-sm font-medium text-neutral-300 bg-neutral-900 rounded-lg hover:bg-neutral-800 border border-neutral-800 transition-all hover:border-neutral-700"
+                className="px-2 md:px-4 py-2 text-sm font-medium text-neutral-300 bg-neutral-900 rounded-lg hover:bg-neutral-800 border border-neutral-800 transition-all hover:border-neutral-700"
               >
                 Sign out
               </button>
@@ -100,15 +106,15 @@ export default function Dashboard() {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8 flex flex-wrap gap-4 items-center justify-between">
-          <div className="flex gap-4">
+      <main className="max-w-7xl mx-auto px-2 md:px-6 lg:px-8 py-8">
+        <div className="mb-8 flex flex-wrap gap-4 items-center lg:items-start justify-around lg:justify-between">
+          <div className="flex  gap-4">
             <select
               value={filter}
               onChange={(e) =>
                 setFilter(e.target.value as ReportStatus | "ALL")
               }
-              className="bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/20"
+              className="bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg px-2 lg:px-4 py-2 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/20"
             >
               <option value="ALL">All Statuses</option>
               {Object.values(ReportStatus).map((status) => (
@@ -123,7 +129,7 @@ export default function Dashboard() {
               onChange={(e) =>
                 setTypeFilter(e.target.value as ReportType | "ALL")
               }
-              className="bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/20"
+              className="bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg px-2 lg:px-4 py-2 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/20"
             >
               <option value="ALL">All Types</option>
               {Object.values(ReportType).map((type) => (
@@ -139,13 +145,13 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="grid gap-4">
+        <div className="flex flex-wrap mx-auto gap-8">
           {filteredReports.map((report) => (
             <div
               key={report.id}
-              className="bg-neutral-900/50 backdrop-blur-sm rounded-xl p-6 border border-neutral-800 hover:border-neutral-700 transition-all"
+              className="bg-neutral-900/50 backdrop-blur-sm rounded-xl p-2 lg:p-6 border border-neutral-800 hover:border-neutral-700 transition-all"
             >
-              <div className="flex justify-between items-start gap-6">
+              <div className="flex flex-col lg:flex-row lg:items-start gap-6">
                 <div className="space-y-4 flex-1">
                   <div className="flex items-center gap-3">
                     <h2 className="text-lg font-medium text-neutral-200">

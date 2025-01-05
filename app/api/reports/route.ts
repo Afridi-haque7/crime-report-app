@@ -45,12 +45,12 @@ export async function GET(req: Request) {
         },
       }),
       new Promise((_, reject) =>
-        setTimeout(() => reject(new Error("Database timeout")), 15000)
+        setTimeout(() => reject(new Error("Database timeout")), 150000)
       ),
     ]);
 
     return NextResponse.json(reports);
-  } catch (error: any) {
+  } catch (error) {
     console.error("Failed to fetch reports:", error);
 
     // More specific error messages

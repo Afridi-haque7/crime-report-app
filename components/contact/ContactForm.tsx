@@ -10,8 +10,47 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useState } from "react";
 
 export default function ContactForm() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault(); 
+
+    try {
+      const contactData = {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      }
+
+      console.log(contactData);
+      
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+      
+    } catch (error) {
+      console.log(error); 
+    }finally{
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    }
+    
+  };
   return (
     <div className="w-full mx-auto mt-4 px-0 md:px-6 lg:px-24 py-8 ">
       <main className="relative px-0 md:px-12 pt-4 pb-20">
@@ -26,13 +65,21 @@ export default function ContactForm() {
         </div>
 
         {/* Contact Form */}
-        <form className="space-y-4 px-8 py-20 mt-20 rounded-2xl bg-zinc-800/50">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 px-8 py-20 mt-20 rounded-2xl bg-zinc-800/50"
+        >
           <div>
             <label className="block text-sm font-medium text-zinc-400 mb-2">
               Name
             </label>
             <input
               type="text"
+              value={formData.name}
+              onChange={(e) => {
+                setFormData((prev) => ({ ...prev, name: e.target.value }));
+              }
+              }
               className="w-full rounded-xl bg-zinc-900/50 border border-zinc-800 px-4 py-3.5
                    text-white transition-colors duration-200
                    focus:outline-none focus:ring-2 focus:ring-sky-500/40"
@@ -45,6 +92,10 @@ export default function ContactForm() {
             </label>
             <input
               type="email"
+              value={formData.email}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, email: e.target.value }))
+              }
               className="w-full rounded-xl bg-zinc-900/50 border border-zinc-800 px-4 py-3.5
                    text-white transition-colors duration-200
                    focus:outline-none focus:ring-2 focus:ring-sky-500/40"
@@ -57,6 +108,10 @@ export default function ContactForm() {
             </label>
             <input
               type="text"
+              value={formData.subject}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, subject: e.target.value }))
+              }
               className="w-full rounded-xl bg-zinc-900/50 border border-zinc-800 px-4 py-3.5
                    text-white transition-colors duration-200
                    focus:outline-none focus:ring-2 focus:ring-sky-500/40"
@@ -69,6 +124,10 @@ export default function ContactForm() {
             </label>
             <textarea
               rows={4}
+              value={formData.message}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, message: e.target.value }))
+              }
               className="w-full rounded-xl bg-zinc-900/50 border border-zinc-800 px-4 py-3.5
                    text-white transition-colors duration-200
                    focus:outline-none focus:ring-2 focus:ring-sky-500/40"
@@ -79,6 +138,7 @@ export default function ContactForm() {
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <button
+              type="submit"
                 className="w-full relative flex justify-center gap-2 items-center group overflow-hidden rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 
                  px-4 py-3.5 text-sm font-medium text-white shadow-lg
                  transition-all duration-200 hover:from-sky-400 hover:to-blue-500
@@ -102,7 +162,9 @@ export default function ContactForm() {
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>Your message sent to SafeReport team</AlertDialogTitle>
+                <AlertDialogTitle>
+                  Your message sent to SafeReport team
+                </AlertDialogTitle>
                 <AlertDialogDescription>
                   You will hear from us within 24 hours.
                 </AlertDialogDescription>
