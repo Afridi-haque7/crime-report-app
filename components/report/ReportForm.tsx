@@ -16,7 +16,7 @@ const REPORT_TYPES = [
 type ReportType = "EMERGENCY" | "NON_EMERGENCY";
 
 interface ReportFormProps {
-  onComplete: (data: any) => void;
+  onComplete: (data: unknown) => void;
 }
 
 export function ReportForm({ onComplete }: ReportFormProps) {
@@ -72,7 +72,7 @@ export function ReportForm({ onComplete }: ReportFormProps) {
           description: data.description,
           reportType: data.reportType,
         }));
-        setImage(base64 as String);
+        setImage(base64 as string);
       }
     } catch (error) {
       console.error(error);

@@ -84,19 +84,19 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col justify-center">
+    <div className="min-h-screen bg-black text-white flex flex-col justify-start">
       <nav className="border-b border-neutral-800 bg-black/50 backdrop-blur-xl sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
-              <span className="hidden md:block">Admin</span> Dashboard
+            <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+              <span className="hidden md:visible">Admin</span> Dashboard
             </h1>
             <div className="flex items-center gap-2 md:gap-6">
               <span className="text-neutral-400">
                 {session?.user?.name || "Admin"}
               </span>
               <button
-                onClick={() => signOut()}
+                onClick={() => signOut({ callbackUrl: "/auth/signin" })}
                 className="px-2 md:px-4 py-2 text-sm font-medium text-neutral-300 bg-neutral-900 rounded-lg hover:bg-neutral-800 border border-neutral-800 transition-all hover:border-neutral-700"
               >
                 Sign out
@@ -107,7 +107,7 @@ export default function Dashboard() {
       </nav>
 
       <main className="max-w-7xl mx-auto px-2 md:px-6 lg:px-8 py-8">
-        <div className="mb-8 flex flex-wrap gap-4 items-center lg:items-start justify-around lg:justify-between">
+        <div className="mb-8 w-full flex gap-4 items-center md:items-start justify-around md:justify-between">
           <div className="flex  gap-4">
             <select
               value={filter}
@@ -219,7 +219,7 @@ export default function Dashboard() {
           ))}
 
           {filteredReports.length === 0 && (
-            <div className="text-center py-12 text-neutral-500 bg-neutral-900/50 rounded-xl border border-neutral-800">
+            <div className="text-center py-12 px-4 lg:px-20 text-neutral-500 bg-neutral-900/50 rounded-xl border border-neutral-800">
               No reports found matching the selected filters.
             </div>
           )}

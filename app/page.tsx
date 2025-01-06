@@ -1,13 +1,6 @@
 'use client';
 import Link from "next/link";
-import dynamic from "next/dynamic";
 
-const AnimatedNumbers = dynamic(
-  () => {
-    return import("react-animated-numbers");
-  },
-  {ssr: false}
-);
 
 export default function Home() {
   return (
