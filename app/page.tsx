@@ -1,8 +1,11 @@
 'use client';
 import Link from "next/link";
+import AnimatedNumbers from "react-animated-numbers";
 
 
 export default function Home() {
+    // const [num, setNum] = useState(331331);
+
   return (
     <main className="relative px-6 pt-20 pb-10">
       <div className="mx-auto ">
@@ -151,18 +154,31 @@ export default function Home() {
 
         {/* stats */}
         <div className="mt-40 rounded-2xl bg-zinc-900 p-8">
-          <div className="grid gap-y-8 sm:grid-cols-3">
+          <div className="grid gap-y-8 sm:grid-cols-3 ">
             {[
-              { value: "100K", label: "Reports Filed", postfix: "+" },
-              { value: "100", label: "Anonymity Rate", postfix: "%" },
-              { value: "24/7", label: "Support Available" },
+              { value: 1000, label: "Reports Filed", postfix: "+" },
+              { value: 100, label: "Anonymity Rate", postfix: "%" },
+              { value: 24, label: "Support Available", postfix: "/ 7" },
             ].map((stat, i) => (
-              <div key={i} className="text-center">
-                <div className="text-3xl font-bold text-white">
-                  {stat.value}
+              <div key={i} className="flex flex-col gap-2 justify-center items-center">
+                <div className="flex gap-1">
+                  <AnimatedNumbers
+                    transitions={(index) => ({
+                      type: "spring",
+                      duration: index + 0.3,
+                    })}
+                    animateToNumber={stat.value}
+                    fontStyle={{
+                      fontSize: 36,
+                      color: "white",
+                      fontWeight: "semibold",
+                    }}
+                  />
+                  <div className="text-4xl font-semibold flex items-center justify-center">
+                    {stat.postfix}
+                  </div>
                 </div>
-
-                <div className="mt-1 text-sm text-zinc-400">{stat.label}</div>
+                <div>{stat.label}</div>
               </div>
             ))}
           </div>
