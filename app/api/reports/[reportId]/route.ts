@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { reportId: string } }
 ) {
   const id = params.reportId;
   try {
@@ -21,7 +21,7 @@ export async function PATCH(
     });
 
     return NextResponse.json(report);
-  } catch (error) {  
+  } catch (error) {
     console.log("Error updating report ", error);
 
     return NextResponse.json(
