@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
+import db from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 
 
@@ -15,7 +15,7 @@ export async function PATCH(
     }
 
     const { status } = await request.json();
-    const report = await prisma.report.update({
+    const report = await db.report.update({
       where: { id: id },
       data: { status },
     });

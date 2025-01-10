@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
+import db from "@/lib/prisma";
 import { ReportType } from "@prisma/client";
 
 export async function POST(request:Request) {
@@ -17,7 +17,7 @@ export async function POST(request:Request) {
           status,
         } = await request.json();
 
-        const report = await prisma.report.create({
+        const report = await db.report.create({
           data: {
             reportId,
             type: type as ReportType,

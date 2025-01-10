@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 
 import { ReportStatus, ReportType } from "@prisma/client";
-import prisma from "@/lib/prisma";
+import db from "@/lib/prisma";
 import { authOptions } from "@/lib/auth";
 
 export async function GET(req: Request) {
@@ -24,7 +24,7 @@ export async function GET(req: Request) {
 
     // Add timeout and retry logic
     const reports = await Promise.race([
-      prisma.report.findMany({
+      db.report.findMany({
         where,
         orderBy: {
           createdAt: "desc",
@@ -45,7 +45,7 @@ export async function GET(req: Request) {
         },
       }),
       new Promise((_, reject) =>
-        setTimeout(() => reject(new Error("Database timeout")), 150000)
+        setTimeout(() => reject(new Error("Database timeout")), 15000)
       ),
     ]);
 
@@ -53,19 +53,21 @@ export async function GET(req: Request) {
   } catch (error) {
     console.error("Failed to fetch reports:", error);
 
-    // More specific error messages
-    if (error.code === "P1001") {
-      return NextResponse.json(
-        { error: "Cannot connect to database. Please try again later." },
-        { status: 503 }
-      );
-    }
+    if (error instanceof Error && "code" in error) {
+      if (error.code === "P1001") {
+        // More specific error messages
+        return NextResponse.json(
+          { error: "Cannot connect to database. Please try again later." },
+          { status: 503 }
+        );
+      }
 
-    if (error.code === "P2024") {
-      return NextResponse.json(
-        { error: "Database connection timeout. Please try again." },
-        { status: 504 }
-      );
+      if (error.code === "P2024") {
+        return NextResponse.json(
+          { error: "Database connection timeout. Please try again." },
+          { status: 504 }
+        );
+      }
     }
 
     return NextResponse.json(
@@ -75,7 +77,7 @@ export async function GET(req: Request) {
   } finally {
     // Optional: Disconnect for serverless environments
     if (process.env.VERCEL) {
-      await prisma.$disconnect();
+      await db.$disconnect();
     }
   }
 }
