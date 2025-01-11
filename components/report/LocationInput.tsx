@@ -29,8 +29,14 @@ export function LocationInput({
     setLocationError(null);
 
     try {
+      const resultt = await fetch(
+        `https://geocode.maps.co/search?q=${address}&api_key=${process.env.GEOCODE_KEY}`,
+        {
+          method: "POST",
+        }
+      );
+        console.log(resultt);
       const result = await Radar.forwardGeocode({ query: address });
-        console.log(result);
         
       if (result.addresses && result.addresses.length > 0) {
         const { latitude, longitude } = result.addresses[0];
